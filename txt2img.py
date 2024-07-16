@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 '''
 img2txt - convert decimal values of ASCII characters into RGB values'
 eads RGB values from .png and convts into ascii string, then stores string in a .txt file
