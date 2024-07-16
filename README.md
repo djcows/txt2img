@@ -2,19 +2,12 @@
 Embeds decimals of text in RGB values of pixels to create data compression with images
 
 Example:
-James King Bible stored in a 1202x1202 image file. From 4.3MB to 3.1MB
+James King Bible stored in a 1202x1202 image file, reducing disk size from 4.3mb to 3.1mb.
 
 ![bible_out](https://github.com/user-attachments/assets/18906f9d-1570-4b77-8696-3dffa8c7536a)
 
-
-Install requirements: pip install -r requirements.txt
-
 ## Usage
-```
-from txt2img import txt2img, img2txt
-# insert text data into png image pixels 
-txt2img('bible.txt', 'bible_output_image.png')
-
-# extract text data from png image pixels
-img2txt('bible_output_image.png', 'bible_output_text.txt')
-```
+1. ```pip install -r requirements.txt```
+2. ```import txt2img```
+3. ```txt2img.txt2img('data_in.txt', 'data_out.png')```
+4. ```txt2img.img2txt('data_out.png', 'data_back_in.txt')```
