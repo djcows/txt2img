@@ -1,6 +1,7 @@
 # txt2img - A picture is worth a million words
-> inserts decimal of characters into rgb values of pixels to create compress data in images
+inserts decimal of characters into rgb values of pixels to create compress data in images
 
+Example:
 James King Bible as 1202x1202 image file - 4.3mb(txt) -> 3.1mb(png):
 ![bible_out](https://github.com/user-attachments/assets/18906f9d-1570-4b77-8696-3dffa8c7536a)
 
