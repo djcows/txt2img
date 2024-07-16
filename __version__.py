@@ -5,7 +5,7 @@
 #  \__/_/\_\\__|_____|_|_| |_| |_|\__, |
 #                                 |___/ 
 
-__title__ = "img2txt"
+__title__ = "txt2img"
 __description__ = "a picture is worth a million words"
 __url__ = "github.com/djcows/txt2img"
 __version__ = "1.0"
