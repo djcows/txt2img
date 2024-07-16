@@ -1,2 +1,2 @@
 # txt2img
-## why not store everything in pixels?
+## converts valid ascii characters in a .txt file into RGB pixel values and stores it as a .png file
