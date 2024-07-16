@@ -1,10 +1,7 @@
 from txt2img import txt2img, img2txt
-import time
 
 # ascii -> rgb
-txt2img('bible.txt', 'bible_image.png')
+txt2img('data_in.txt', 'data_out.png')
 
-time.sleep(0.25)
-
-# read bible image pixel data back to txt file
-img2txt('bible_image.png', 'bible_return.txt')
+# rgb -> ascii
+img2txt('data_out.png', 'data_back_in.txt')
