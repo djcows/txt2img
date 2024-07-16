@@ -62,4 +62,4 @@ def img2txt(img_path, txt_path):
     with open(txt_path, 'w', encoding='utf-8') as file:
         file.write(text)
     
-    print(f'img2txt complete {txt_path}')
+    print(f'img2txt complete: {txt_path}')
