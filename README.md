@@ -1,5 +1,5 @@
 # txt2img - A picture is worth a million words
-Embeds decimals of text in RGB values of pixels to create data compression with images
+Embeds decimals of ascii in RGB values of pixels for lossless data compression
 
 Example:
 James King Bible stored in a 1202x1202 image file, reducing disk size from 4.3mb to 3.1mb.
