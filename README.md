@@ -2,7 +2,8 @@
 Embeds decimals of text in RGB values of pixels to create data compression with images
 
 Example:
-James King Bible as 1202x1202 image file - 4.3mb(txt) -> 3.1mb(png):
+James King Bible stored in a 1202x1202 image file. From 4.3MB to 3.1MB
+
 ![bible_out](https://github.com/user-attachments/assets/18906f9d-1570-4b77-8696-3dffa8c7536a)
 
 
