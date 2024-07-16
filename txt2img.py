@@ -1,18 +1,24 @@
 '''
+  _        _   ____  _                 
+ | |___  _| |_|___ \(_)_ __ ___   __ _ 
+ | __\ \/ / __| __) | | '_ ` _ \ / _` |
+ | |_ >  <| |_ / __/| | | | | | | (_| |
+  \__/_/\_\\__|_____|_|_| |_| |_|\__, |
+                                 |___/ 
+
 img2txt - convert decimal values of ASCII characters into RGB values
 Reads RGB values from .png and converts them into an ASCII string, then stores the string in a .txt file
 
-Usage:
-from txt2img import txt2img, img2txt
+Example:
+import txt2img
 
-# ascii -> rgb
-txt2img('data_in.txt', 'data_out.png')
-
-rgb -> ascii
-img2txt('data_out.png', 'data_back_in.txt')
+txt2img.txt2img('data_in.txt', 'data_out.png')
+txt2img.img2txt('data_out.png', 'data_back_in.txt')
 '''
-__version__ = '1.0'
-__author__ = 'x.com/djcows'
+
+__version__ = "1.0"
+__author__ = "djcows"
+__license__ = "GNU GPL 3."
 __copyright__ = '(C)2024 djcows. GNU GPLv3.'
 
 from utils import txt_to_ascii
