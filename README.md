@@ -10,7 +10,7 @@ Run example.py to reproduce baseline results:
 2. ```python3 example.py```
 
 ```
-from img2txt import txt2img, img2txt
+from txt2img import txt2img, img2txt
 
 # ascii -> rgb
 txt2img('data_in.txt', 'data_out.png')
