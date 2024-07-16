@@ -3,7 +3,7 @@
 
 - Reads ascii data from .txt file and writes it to .png file
 - calculates smallest perfect square given num of bits in file
-- To return back to ascii, use img2txt to read
+- To return back to ascii, use img2txt
 
 Run example.py to reproduce baseline results:
 1. ```pip install -r requirements.txt```
