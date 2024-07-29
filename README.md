@@ -1,22 +1,37 @@
-# txt2img - lossless data compression using pixels
-Embeds binary data to pixel values of images
+# txt2img - store files inside PNG pixels
+1. Binary data of input file is read into memory
+2. Data is compressed using LZMA
+3. Compressed data is inserted into a numpy array
+4. Numpy array is saved as a .png image using pillow
 
-Example:
-king_james_bible.txt (4.3mb) ---> king_james_bible.png (1.0mb)
-![bible_small](https://github.com/user-attachments/assets/9d47be7d-2c6d-4dd8-89c8-c90871dcd5fd) 
+This process is completely lossless and reversible using img2txt.
+##
 
-## Usage
-1. Install packages: ```pip install -r requirements.txt```
-2. run example.py
+#### How-To
+Install required modules (currently numpy and pillow) ```pip install -r requirements.txt```
 ```
 from Txt2Img import Txt2Img
-# beware of usage with large files, only tested on <1gb files
+pixels = Txt2Img()
+pixels.txt2img('bible.txt', 'bible.png', compression_level=9)
+pixels.img2txt('bible.png', 'bible_return.txt')
+```
+txt2img has optional parameter compression_level to select values in domain [0,9].
 
-# initialize Txt2Img() object
-t = Txt2Img()
 
-# call txt2img to write data to pixel values. any file format works as input. compression level is optional, from min to max compression: 0 to 9
-t.txt2img('bible.txt', 'bible.png', compression_level=9)
- 
-# call img2txt to read data from pixel values file (any format)
-t.img2txt('bible.png', 'bible_return.txt')```
+##
+Data with many repeating patterns will naturally have a higher compression ratio as run-length encoding and dictionary encoding.
+- bible.txt (4.3MB) -> bible.png (1.0MB)
+
+![bible_small](https://github.com/user-attachments/assets/9d47be7d-2c6d-4dd8-89c8-c90871dcd5fd)
+
+##
+
+Data such as MP3 have a much lower compression ratio because they are already compressed, but songs can nonetheless be stored as pixels and converted back to MP3 as desired.
+- Daft Punk - Harder, Better, Faster, Stronger.mp3  (3.6MB) -> Daft Punk - Harder, Better, Faster, Stronger.png (3.5 MB)
+![Daft Punk - Harder, Better, Faster, Stronger](https://github.com/user-attachments/assets/65eb60fd-ea63-4f66-8868-c368fbdb0902)
+
+## 
+
+This is part of a passion project of mine to create new wireless data transfer method. I believe human languages are a mistake in a world of technology, because they are orders of magnitude slower than binary data transfer of computers, so in order to merge with AI successfully, we should make data transfer much, much faster.
+It will become increasingly obvious that trying to solve problems from a human language perspective is too slow to merge with AI. Therefore, it may be wise to create an extremely fast data transfer protocol that does not require authentication, such that gigabit scale wireless communication can occur within seconds.
+This is all assuming we will have brain-machine interfaces to send/receive such enormous amounts of data.
