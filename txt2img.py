@@ -1,4 +1,4 @@
-'''
+r'''
  _        _   ____  _                 
 | |___  _| |_|___ \(_)_ __ ___   __ _ 
 | __\ \/ / __| __) | | '_ ` _ \ / _` |
@@ -50,7 +50,7 @@ class Txt2Img:
 
         # save
         image = Image.fromarray(image_array, 'RGBA')
-        image.save(output_image, format='PNG', compress_level=9)
+        image.save(output_image, format='PNG', compress_level=1)
 
         original_size = os.path.getsize(input_file)
         image_size = os.path.getsize(output_image)
