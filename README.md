@@ -1,17 +1,14 @@
-# txt2img - A picture is worth a million words
-Embeds decimals of ascii in RGB values of pixels for lossless data compression
+# txt2img - lossless data compression using pixels
+Embeds binary data to pixel values of images
 
 Example:
-James King Bible stored in a 1202x1202 image file, reducing disk size from 4.3mb to 3.1mb.
+bible.txt (4.3mb) ---> bible.png (1.0mb)
 
 ![bible_out](https://github.com/user-attachments/assets/18906f9d-1570-4b77-8696-3dffa8c7536a)
 
 ## Usage
-1. ```pip install -r requirements.txt```
-2. 
-```
-from Txt2Img import txt2img
-t = Txt2Img()
-txt2img.txt2img('data_in.txt', 'data_out.png', compression_level=9) # compression_level optional, min 0, max 9
-txt2img.img2txt('data_out.png', 'data_back_in.txt')
-```
+1. install requirements: ```pip install -r requirements.txt```
+2. import package: ```from Txt2Img import txt2img```
+3. initialize object: ```t = Txt2Img()```
+4. write data to pixel values: ```t.txt2img('data_in.txt', 'data_out.png', compression_level=9) # compression_level optional, min 0, max 9```
+5. read data from pixel values: ```txt2img.img2txt('data_out.png', 'data_back_in.txt')```
