@@ -1,71 +1,82 @@
 '''
-  _        _   ____  _                 
- | |___  _| |_|___ \(_)_ __ ___   __ _ 
- | __\ \/ / __| __) | | '_ ` _ \ / _` |
- | |_ >  <| |_ / __/| | | | | | | (_| |
-  \__/_/\_\\__|_____|_|_| |_| |_|\__, |
-                                 |___/ 
+ _        _   ____  _                 
+| |___  _| |_|___ \(_)_ __ ___   __ _ 
+| __\ \/ / __| __) | | '_ ` _ \ / _` |
+| |_ >  <| |_ / __/| | | | | | | (_| |
+ \__/_/\_\\__|_____|_|_| |_| |_|\__, |
+                                |___/
 
-img2txt - convert decimal values of ASCII characters into RGB values
-Reads RGB values from .png and converts them into an ASCII string, then stores the string in a .txt file
-
-Example:
-import txt2img
-
-txt2img.txt2img('data_in.txt', 'data_out.png')
-txt2img.img2txt('data_out.png', 'data_back_in.txt')
+store data in pixels
 '''
+__author__ = 'djcows'
+__version__ = '2.0'
+__copyright__ = 'GNU GPLv3'
 
-__version__ = "1.0"
-__author__ = "djcows"
-__license__ = "GNU GPL 3."
-__copyright__ = '(C)2024 djcows. GNU GPLv3.'
-
-from utils import txt_to_ascii
-from PIL import Image
+import os
 import math
+import sys
+import numpy as np
+from PIL import Image
+from utils import file_to_binary, binary_to_file, compress_data, decompress_data
 
-def txt2img(txt_path, img_path, max_size=65536):
-    ascii_values = txt_to_ascii(txt_path)
-    if not ascii_values:
-        return 1
+class Txt2Img:
+    def txt2img(self, input_file: str, output_image: str, compression_level=9):
+        # protect user from compressing files >500mb while not supported
+        if os.path.getsize(input_file) > 500000000:
+            ui = input('LARGE FILE WARNING\nLarge filesizes are not supported and are extremely slow.\nProceed? (Y/n)')
+            if ui.lower() != 'y':
+                print('txt2img operation cancelled')
+                sys.exit()
+
+        binary_data = file_to_binary(input_file)
+        try:
+            compressed_data = compress_data(binary_data, compression_level)
+        except Exception as e:
+            print(f'compression failed: {str(e)}')
+            return 1
+
+        # use RGBA with 8-bit color depth
+        rgba_values = np.frombuffer(compressed_data, dtype=np.uint8)
+        
+        # calculate ideal size of image, perfect square for simplicity
+        pixel_count = math.ceil(len(rgba_values) / 4)
+        max_size=65536
+        dim = min(math.ceil(math.sqrt(pixel_count)), max_size)
+        print(f'output image dimensions = {dim}x{dim}')
+        
+        # create array of ideal size
+        image_array = np.full((dim, dim, 4), 255, dtype=np.uint8)
+        image_array.flat[:len(rgba_values)] = rgba_values
+
+        # save
+        image = Image.fromarray(image_array, 'RGBA')
+        image.save(output_image, format='PNG', compress_level=9)
+
+        original_size = os.path.getsize(input_file)
+        image_size = os.path.getsize(output_image)
+        
+        print(f'output file created: {output_image}\ninput size: {original_size} bytes\noutput size: {image_size} bytes\n')
+        print(f'filesize delta: {(1 - image_size/original_size) * 100:.2f}%')
+
+    # mirrors file_to_image steps
+    def img2txt(self, input_image: str, output_file: str):
+        if os.path.getsize(input_image) > 500000000:
+            ui = input('LARGE FILE WARNING\nLarge filesizes are not natively supported and are extremely slow.\nProceed? (Y/n)')
+            if ui.lower() != 'y':
+                print('img2txt operation cancelled')
+                sys.exit()
+
+        image = Image.open(input_image)
+        rgba_values = np.array(image)
+        compressed_data = rgba_values.tobytes()
+
+        try:
+            binary_data = decompress_data(compressed_data)
+        except Exception as e:
+            print(f'decompression failed: {str(e)}')
+            return 1
+
+        binary_to_file(binary_data, output_file)
+        print(f'output file created: {output_file}')
+        return 0
     
-    # pad with zeroes to make length a multiple of 3
-    ascii_values += [0] * ((3 - len(ascii_values) % 3) % 3)
-
-    # calculate best fit square given data size
-    pixel_count = len(ascii_values) // 3
-    dim = min(math.ceil(math.sqrt(pixel_count)), max_size)
-
-    print(f'image dimension set: {dim}x{dim}')
-
-    # create and populate image array
-    image = Image.new('RGB', (dim, dim), color='black')
-    pixels = image.load()
-    
-    for idx in range(0, len(ascii_values), 3):
-        x = (idx // 3) % dim
-        y = (idx // 3) // dim
-        if y < dim:
-            r, g, b = ascii_values[idx:idx+3]
-            pixels[x, y] = (r, g, b)
-    
-    # save image
-    image.save(img_path)
-    print(f'txt2img complete: {img_path}') 
-
-def img2txt(img_path, txt_path):
-    image = Image.open(img_path)
-    pixels = image.load()
-    width, height = image.size
-
-    ascii_values = [pixels[x, y][i] for y in range(height) for x in range(width) for i in range(3)]
-    ascii_values = [val for val in ascii_values if val != 0]
-
-    # convert ascii decimal values to string
-    text = ''.join(chr(value) for value in ascii_values)
-    
-    with open(txt_path, 'w', encoding='utf-8') as file:
-        file.write(text)
-    
-    print(f'img2txt complete: {txt_path}')

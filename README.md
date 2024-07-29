@@ -8,6 +8,10 @@ James King Bible stored in a 1202x1202 image file, reducing disk size from 4.3mb
 
 ## Usage
 1. ```pip install -r requirements.txt```
-2. ```import txt2img```
-3. ```txt2img.txt2img('data_in.txt', 'data_out.png')```
-4. ```txt2img.img2txt('data_out.png', 'data_back_in.txt')```
+2. 
+```
+from Txt2Img import txt2img
+t = Txt2Img()
+txt2img.txt2img('data_in.txt', 'data_out.png', compression_level=9) # compression_level optional, min 0, max 9
+txt2img.img2txt('data_out.png', 'data_back_in.txt')
+```
