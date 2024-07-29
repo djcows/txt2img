@@ -32,6 +32,4 @@ Data such as MP3 have a much lower compression ratio because they are already co
 
 ## 
 
-This is part of a passion project of mine to create new wireless data transfer method. I believe human languages are a mistake in a world of technology, because they are orders of magnitude slower than binary data transfer of computers, so in order to merge with AI successfully, we should make data transfer much, much faster.
-It will become increasingly obvious that trying to solve problems from a human language perspective is too slow to merge with AI. Therefore, it may be wise to create an extremely fast data transfer protocol that does not require authentication, such that gigabit scale wireless communication can occur within seconds.
-This is all assuming we will have brain-machine interfaces to send/receive such enormous amounts of data.
+This is part of a passion project of mine to create new wireless data transfer method. I order to merge with AI successfully, we should make wireless transfer much, much faster.
