@@ -6,8 +6,17 @@ king_james_bible.txt (4.3mb) ---> king_james_bible.png (1.0mb)
 ![bible_small](https://github.com/user-attachments/assets/9d47be7d-2c6d-4dd8-89c8-c90871dcd5fd)
 
 ## Usage
-1. install requirements: ```pip install -r requirements.txt```
-2. import package: ```from Txt2Img import txt2img```
-3. initialize object: ```t = Txt2Img()```
-4. write data to pixel values: ```t.txt2img('data_in.txt', 'data_out.png', compression_level=9) # compression_level optional, min 0, max 9```
-5. read data from pixel values: ```txt2img.img2txt('data_out.png', 'data_back_in.txt')```
+1. Install packages: ```pip install -r requirements.txt```
+2. run example.py
+```
+from Txt2Img import Txt2Img
+# beware of usage with large files, only tested on <1gb files
+
+# initialize Txt2Img() object
+t = Txt2Img()
+
+# call txt2img to write data to pixel values. any file format works as input. compression level is optional, from min to max compression: 0 to 9
+t.txt2img('./txt/bible.txt', './img/bible_small.png', compression_level=9)
+ 
+# call img2txt to read data from pixel values file (any format)
+t.img2txt('./img/bible_small.png', './txt/bible_return.txt')```
