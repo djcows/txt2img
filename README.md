@@ -2,9 +2,8 @@
 Embeds binary data to pixel values of images
 
 Example:
-bible.txt (4.3mb) ---> bible.png (1.0mb)
-
-![bible_out](https://github.com/user-attachments/assets/18906f9d-1570-4b77-8696-3dffa8c7536a)
+king_james_bible.txt (4.3mb) ---> king_james_bible.png (1.0mb)
+![bible_small](https://github.com/user-attachments/assets/9d47be7d-2c6d-4dd8-89c8-c90871dcd5fd)
 
 ## Usage
 1. install requirements: ```pip install -r requirements.txt```
